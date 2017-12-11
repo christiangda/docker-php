@@ -63,7 +63,8 @@ RUN apk --no-cache --update add \
         php7-xmlreader=${PHP_VERSION} \
         php7-xmlwriter=${PHP_VERSION} \
         php7-zip=${PHP_VERSION} \
-        php7-zlib=${PHP_VERSION}
+        php7-zlib=${PHP_VERSION} \
+      && rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 #
 RUN set -ex \
