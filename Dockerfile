@@ -70,9 +70,7 @@ RUN apk --no-cache --update add \
 #
 RUN set -ex \
     && rm -rf /etc/apache2/httpd.conf \
-    && rm -rf /etc/apache2/conf.d/default.conf \
-    && rm -rf /etc/apache2/conf.d/userdir.conf \
-    && rm -rf /etc/apache2/conf.d/proxy.conf \
+    && rm -rf /etc/apache2/conf.d/* \
     && mkdir -p ${APACHE_APP_ROOT} \
     && chown -R ${APACHE_USER}.${APACHE_GROUP} ${APACHE_HOME_ROOT}
 
@@ -82,8 +80,9 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Copy config files
 COPY config/httpd.conf /etc/apache2/httpd.conf
-COPY config/apache2/conf.d/ /etc/apache2/conf.d/
 COPY config/fpm-pool-www.conf /etc/php7/php-fpm.d/www.conf
+COPY config/apache2/conf.d/ /etc/apache2/conf.d/
+
 COPY config/php7/php-fpm.conf /etc/php7/php-fpm.conf
 COPY config/php7/php.ini /etc/php7/php.ini
 
