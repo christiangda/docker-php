@@ -12,7 +12,7 @@ ENV PHP_VERSION=${PHP_VERSION:-7.1.12-r0} \
     APACHE_APP_ROOT="/var/www/html" \
     APACHE_USER="apache" \
     APACHE_GROUP="apache"
-
+    
 # Container's Labels
 LABEL maintainer="Christian González Di Antonio <christiangda@gmail.com>, Elías Moreno <elias.moreno.tec@gmail.com>" \
       org.opencontainers.image.authors="Christian González Di Antonio <christiangda@gmail.com>" \

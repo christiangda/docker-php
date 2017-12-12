@@ -46,3 +46,8 @@ look inside the container
 docker run --tty --interactive --rm --name php7 \
   christiangda/php:latest bash
 ```
+
+see internal environment variables
+```
+docker run --tty --interactive --rm --name php7   --publish 80:80   christiangda/php:latest env
+```
