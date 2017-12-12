@@ -9,6 +9,7 @@ ENV PHP_VERSION=${PHP_VERSION:-7.1.12-r0} \
     APACHE_VERSION=${APACHE_VERSION:-2.4.29-r1} \
     APACHE_PORT=80 \
     APACHE_HOME_ROOT="/var/www" \
+    APACHE_APP_ROOT="/var/www/html" \
     APACHE_USER="apache" \
     APACHE_GROUP="apache"
 
@@ -72,6 +73,7 @@ RUN set -ex \
     && rm -rf /etc/apache2/conf.d/default.conf \
     && rm -rf /etc/apache2/conf.d/userdir.conf \
     && rm -rf /etc/apache2/conf.d/proxy.conf \
+    && mkdir -p ${APACHE_APP_ROOT} \
     && chown -R ${APACHE_USER}.${APACHE_GROUP} ${APACHE_HOME_ROOT}
 
 # Copy provisioning files
