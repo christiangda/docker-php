@@ -19,10 +19,14 @@ build with arguments
 docker build --rm \
   --build-arg ALPINE_VERSION=3.7 \
   --build-arg PHP_VERSION=7.1.12-r0 \
-  --tag christiangda/php:apache2-fpm-alpine-7.1.12-r0 \
+  --tag christiangda/php:7.1.12-r0-fpm-alpine-3.7 \
+  --tag christiangda/php:7.1.12-r0-fpm-alpine \
+  --tag christiangda/php:7.1.12-r0-fpm \
   --tag christiangda/php:7.1.12-r0 \
+  --tag christiangda/php:7.1.12 \
+  --tag christiangda/php:7.1 \
+  --tag christiangda/php:7 \
   --tag christiangda/php:latest .
-
 ```
 
 run interactive

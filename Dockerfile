@@ -13,13 +13,14 @@ ENV PHP_VERSION=${PHP_VERSION:-7.1.12-r0} \
     APACHE_GROUP="apache"
 
 # Container's Labels
-LABEL maintainer="Christian González Di Antonio <christiangda@gmail.com>" \
+LABEL maintainer="Christian González Di Antonio <christiangda@gmail.com>, Elías Moreno <elias.moreno.tec@gmail.com>" \
       org.opencontainers.image.authors="Christian González Di Antonio <christiangda@gmail.com>" \
+      org.opencontainers.image.authors="Elías Moreno <elias.moreno.tec@gmail.com>" \
       org.opencontainers.image.url="https://github.com/christiangda/docker-php" \
       org.opencontainers.image.documentation="https://github.com/christiangda/docker-php" \
       org.opencontainers.image.source="https://github.com/christiangda/docker-php" \
-      org.opencontainers.image.version="apache-${APACHE_VERSION}_php-${PHP_VERSION}_alpine-${ALPINE_VERSION}" \
-      org.opencontainers.image.vendor="Christian González Di Antonio <christiangda@gmail.com>" \
+      org.opencontainers.image.version="${PHP_VERSION}" \
+      org.opencontainers.image.vendor="Christian González Di Antonio <christiangda@gmail.com>, Elías Moreno <elias.moreno.tec@gmail.com>" \
       org.opencontainers.image.licenses="Apache License Version 2.0, The PHP License, version 3.01" \
       org.opencontainers.image.title="PHP version ${PHP_VERSION}" \
       org.opencontainers.image.description="PHP version ${PHP_VERSION} docker image"
@@ -30,7 +31,6 @@ RUN apk --no-cache --update add \
         apache2-ctl=${APACHE_VERSION} \
         apache2-proxy=${APACHE_VERSION} \
         php7=${PHP_VERSION} \
-        #php7-apache2=${PHP_VERSION} \
         php7-bz2=${PHP_VERSION} \
         php7-ctype=${PHP_VERSION} \
         php7-curl=${PHP_VERSION} \
@@ -78,22 +78,15 @@ RUN set -ex \
 COPY scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+# Copy config files
 COPY config/httpd.conf /etc/apache2/httpd.conf
-COPY config/default.conf /etc/apache2/conf.d/default.conf
-COPY config/mpm.conf /etc/apache2/conf.d/mpm.conf
-COPY config/proxy.conf /etc/apache2/conf.d/proxy.conf
+COPY config/apache2/conf.d/ /etc/apache2/conf.d/
+COPY config/fpm-pool-www.conf /etc/php7/php-fpm.d/www.conf
+COPY config/php7/php-fpm.conf /etc/php7/php-fpm.conf
+COPY config/php7/php.ini /etc/php7/php.ini
 
 # Ports
 EXPOSE ${APACHE_PORT}
 
-#USER ${APACHE_USER}
-
-#WORKDIR ${APACHE_HOME_ROOT}
-
-#VOLUME ${APACHE_HOME_ROOT}
-
-# Force any command provision the container
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-
-# Default command to run on boot
-CMD ["apachectl", "-D", "apache2","-f","/app/conf/httpd.conf"]
+# Default command to run on boot Default command to run on boot
+CMD ["/usr/local/bin/docker-entrypoint.sh"]
