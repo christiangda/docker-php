@@ -86,6 +86,8 @@ COPY config/apache2/conf.d/ /etc/apache2/conf.d/
 COPY config/php7/php-fpm.conf /etc/php7/php-fpm.conf
 COPY config/php7/php.ini /etc/php7/php.ini
 
+COPY scripts/info.php ${APACHE_APP_ROOT}
+
 # Ports
 EXPOSE ${APACHE_PORT}
 

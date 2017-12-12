@@ -36,6 +36,11 @@ docker run --tty --interactive --rm --name php7 \
   christiangda/php:latest
 ```
 
+test
+```
+curl http://localhost
+```
+
 look inside the container
 ```
 docker run --tty --interactive --rm --name php7 \
