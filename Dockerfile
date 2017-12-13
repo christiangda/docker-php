@@ -79,9 +79,12 @@ COPY scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Copy config files
-COPY config/apache2/ /etc/apache2/
+COPY config/httpd.conf /etc/apache2/httpd.conf
 COPY config/fpm-pool-www.conf /etc/php7/php-fpm.d/www.conf
-COPY config/php7/ /etc/php7/
+COPY config/apache2/conf.d/ /etc/apache2/conf.d/
+
+COPY config/php7/php-fpm.conf /etc/php7/php-fpm.conf
+COPY config/php7/php.ini /etc/php7/php.ini
 
 COPY scripts/info.php ${APACHE_APP_ROOT}
 
