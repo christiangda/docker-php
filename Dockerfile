@@ -49,6 +49,7 @@ RUN apk --no-cache --update add \
         php7-memcached \
         php7-oauth \
         php7-openssl=${PHP_VERSION} \
+        php7-pgsql=${PHP_VERSION} \
         php7-pdo=${PHP_VERSION} \
         php7-pdo_pgsql=${PHP_VERSION} \
         php7-pear=${PHP_VERSION} \
